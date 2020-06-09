@@ -1,25 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from "react-redux";
+import store from "./store";
+
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+
+import Home from "./components/home";
+import Login from "./components/login";
+import Register from "./components/register";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <div style={{display:"flex", alignItems:"center", padding:50}}>
+          <Link to="/">
+            <button>Home</button>
+          </Link>
+          <Link to="/login">
+            <button>Login</button>
+          </Link>
+          <Link to="/register">
+            <button>Register</button>
+          </Link>
+        </div>
+        <div style={{paddingLeft:50, paddingRight:50}}>
+          <Route path="/" exact component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
